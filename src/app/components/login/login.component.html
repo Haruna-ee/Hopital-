@@ -1,0 +1,85 @@
+<br />
+<br />
+<div id="pricing" class="cards-2">
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-lg-4">
+        <!-- Card-->
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">LOGIN</div>
+            <div class="card-subtitle">
+              Get right in |
+              <span routerLink="/" class="pointer">E-Hospital</span>
+            </div>
+            <form role="form" [formGroup]="" (ngSubmit)="onSubmit()">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend">
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-person-fill theme"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="Email"
+                  aria-describedby="inputGroupPrepend"
+                  required
+                />
+                <div class="invalid-feedback">Please enter an email.</div>
+              </div>
+              <div class="input-group mb-2" id="show_hide_password">
+                <input
+                  type="password"
+                  class="form-control"
+                  formControlName="password"
+                  placeholder="Password"
+                  aria-describedby="inputGroupPrepend"
+                  required
+                />
+                <div class="input-group-prepend">
+                  <a href="" class="input-group-text" id="inputGroupPrepend"
+                    ><i class="fa fa-eye-slash theme" aria-hidden="true"></i
+                  ></a>
+                </div>
+                <div class="invalid-feedback">Please select a password.</div>
+              </div>
+              <div class="input-group mb-4 center pointer login">
+                <span
+                  >Don't have an account?
+                  <a routerLink="/register">Register</a></span
+                >
+              </div>
+            </form>
+
+            <div class="button-wrapper">
+              <a class="btn-solid-reg page-scroll" routerLink="/">Login</a>
+            </div>
+          </div>
+        </div>
+        <!-- end of card -->
+        <!-- end of card -->
+      </div>
+      <!-- end of col -->
+      <div class="col"></div>
+    </div>
+    <!-- end of row -->
+  </div>
+  <!-- end of container -->
+</div>
+<!-- end of cards-2 -->
+<!-- end of pricing -->
