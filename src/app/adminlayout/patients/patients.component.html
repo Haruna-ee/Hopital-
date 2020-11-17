@@ -1,0 +1,55 @@
+<div class="card pad">
+  <div class="container row">
+    <h4>Patients</h4>
+  </div>
+  <div class="col-lg-12 mt-4 mt-lg-0">
+    <dx-data-grid
+      *ngIf="patients"
+      id="patientsContainer"
+      [dataSource]="patients"
+      [columnAutoWidth]="true"
+      [showBorders]="true"
+      [showRowLines]="true"
+      [showColumnLines]="false"
+      [allowColumnReordering]="true"
+      [allowCollapsing]="false"
+      [wordWrapEnabled]="true"
+      [hoverStateEnabled]="true"
+      [stateStoring]="patientsStateOptions"
+      (onFileSaving)="core.onFileSaving($event, 'patients')"
+    >
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+      <dxo-paging [enabled]="true" [pageSize]="10"></dxo-paging>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="[5, 10, 20, 30]"
+        [showInfo]="true"
+      ></dxo-pager>
+      <dxo-search-panel
+        [visible]="true"
+        [width]="240"
+        [placeholder]="'Search...' | translate"
+      ></dxo-search-panel>
+
+      <!-- Columns -->
+      <dxi-column
+        dataField="email"
+        [caption]="'Email' | translate"
+      ></dxi-column>
+
+      <dxi-column
+        dataField="surname"
+        [caption]="'Names' | translate"
+      ></dxi-column>
+      <!-- <dxi-column cellTemplate="actionsTemplate" [caption]="" alignment="right">
+    </dxi-column> -->
+
+      <dxo-export
+        [enabled]="true"
+        fileName="patients"
+        [allowExportSelectedData]="false"
+      ></dxo-export>
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    </dx-data-grid>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule) },
+  { path: 'home', loadChildren: () => import('./adminlayout/adminlayout.module').then(m => m.AdminlayoutModule), canActivate: [AuthGuard]  },
   {
     path: 'login',
     children: [

@@ -1,0 +1,261 @@
+<!-- Personal-Information -->
+<div class="card-box">
+  <h4 class="header-title mt-0">
+    <div class="sidebar-heading">
+      <img style="height: 40px" src="assets/images/logo.png" alt="" />
+    </div>
+  </h4>
+  <div class="panel-body">
+    <hr />
+    <div class="text-left">
+      <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="list-group list-group-flush">
+          <a
+            class="list-group-item list-group-item-action bg-light"
+            routerLink="/home/dashboard"
+            [routerLinkActive]="['router-link-active']"
+            >Dashboard</a
+          >
+          <a
+            *ngIf="role == 'admin' || role == 'doctor'"
+            class="list-group-item list-group-item-action bg-light"
+            routerLink="/home/patients"
+            [routerLinkActive]="['router-link-active']"
+            >Patients</a
+          >
+          <a
+            *ngIf="role == 'admin' || role == 'doctor'"
+            class="list-group-item list-group-item-action bg-light"
+            routerLink="/home/users"
+            [routerLinkActive]="['router-link-active']"
+            >Users</a
+          >
+          <a
+            *ngIf="role == 'admin' || role == 'doctor'"
+            class="list-group-item list-group-item-action bg-light"
+            routerLink="/home/subscribers"
+            [routerLinkActive]="['router-link-active']"
+            >Subscribers</a
+          >
+
+          <a
+            class="list-group-item list-group-item-action bg-light"
+            routerLink="/home/requests"
+            [routerLinkActive]="['router-link-active']"
+            >Requests</a
+          >
+
+          <a
+            *ngIf="role == 'admin' || role == 'doctor' || role == 'nurse'"
+            class="list-group-item list-group-item-action bg-light"
+            routerLink="/home/drugs"
+            [routerLinkActive]="['router-link-active']"
+            >Drugs</a
+          >
+          <a
+            class="list-group-item list-group-item-action bg-light"
+            routerLink="/home/profile"
+            [routerLinkActive]="['router-link-active']"
+            >Profile</a
+          >
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+    </div>
+    <ul class="social-links list-inline mt-4 mb-0">
+      <li class="list-inline-item">
+        <a
+          title=""
+          data-placement="top"
+          data-toggle="tooltip"
+          class="tooltips"
+          href=""
+          data-original-title="Facebook"
+          ><i class="fa fa-facebook"></i
+        ></a>
+      </li>
+      <li class="list-inline-item">
+        <a
+          title=""
+          data-placement="top"
+          data-toggle="tooltip"
+          class="tooltips"
+          href=""
+          data-original-title="Twitter"
+          ><i class="fa fa-twitter"></i
+        ></a>
+      </li>
+      <li class="list-inline-item">
+        <a
+          title=""
+          data-placement="top"
+          data-toggle="tooltip"
+          class="tooltips"
+          href=""
+          data-original-title="Skype"
+          ><i class="fa fa-skype"></i
+        ></a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- Personal-Information -->
+<!-- <div class="card-box ribbon-box">
+  <div class="ribbon ribbon-primary">Messages</div>
+  <div class="clearfix"></div>
+  <div class="inbox-widget">
+    <a href="#">
+      <div class="inbox-item">
+        <div class="inbox-item-img">
+          <img
+            src="https://bootdey.com/img/Content/avatar/avatar2.png"
+            class="rounded-circle"
+            alt=""
+          />
+        </div>
+        <p class="inbox-item-author">Tomaslau</p>
+        <p class="inbox-item-text">I've finished it! See you so...</p>
+        <p class="inbox-item-date">
+          <button
+            type="button"
+            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+          >
+            Reply
+          </button>
+        </p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="inbox-item">
+        <div class="inbox-item-img">
+          <img
+            src="https://bootdey.com/img/Content/avatar/avatar3.png"
+            class="rounded-circle"
+            alt=""
+          />
+        </div>
+        <p class="inbox-item-author">Stillnotdavid</p>
+        <p class="inbox-item-text">This theme is awesome!</p>
+        <p class="inbox-item-date">
+          <button
+            type="button"
+            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+          >
+            Reply
+          </button>
+        </p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="inbox-item">
+        <div class="inbox-item-img">
+          <img
+            src="https://bootdey.com/img/Content/avatar/avatar4.png"
+            class="rounded-circle"
+            alt=""
+          />
+        </div>
+        <p class="inbox-item-author">Kurafire</p>
+        <p class="inbox-item-text">Nice to meet you</p>
+        <p class="inbox-item-date">
+          <button
+            type="button"
+            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+          >
+            Reply
+          </button>
+        </p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="inbox-item">
+        <div class="inbox-item-img">
+          <img
+            src="https://bootdey.com/img/Content/avatar/avatar5.png"
+            class="rounded-circle"
+            alt=""
+          />
+        </div>
+        <p class="inbox-item-author">Shahedk</p>
+        <p class="inbox-item-text">Hey! there I'm available...</p>
+        <p class="inbox-item-date">
+          <button
+            type="button"
+            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+          >
+            Reply
+          </button>
+        </p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="inbox-item">
+        <div class="inbox-item-img">
+          <img
+            src="https://bootdey.com/img/Content/avatar/avatar6.png"
+            class="rounded-circle"
+            alt=""
+          />
+        </div>
+        <p class="inbox-item-author">Adhamdannaway</p>
+        <p class="inbox-item-text">This theme is awesome!</p>
+        <p class="inbox-item-date">
+          <button
+            type="button"
+            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+          >
+            Reply
+          </button>
+        </p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="inbox-item">
+        <div class="inbox-item-img">
+          <img
+            src="https://bootdey.com/img/Content/avatar/avatar2.png"
+            class="rounded-circle"
+            alt=""
+          />
+        </div>
+        <p class="inbox-item-author">Tomaslau</p>
+        <p class="inbox-item-text">I've finished it! See you so...</p>
+        <p class="inbox-item-date">
+          <button
+            type="button"
+            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+          >
+            Reply
+          </button>
+        </p>
+      </div>
+    </a>
+    <a href="#">
+      <div class="inbox-item">
+        <div class="inbox-item-img">
+          <img
+            src="https://bootdey.com/img/Content/avatar/avatar3.png"
+            class="rounded-circle"
+            alt=""
+          />
+        </div>
+        <p class="inbox-item-author">Stillnotdavid</p>
+        <p class="inbox-item-text">This theme is awesome!</p>
+        <p class="inbox-item-date">
+          <button
+            type="button"
+            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+          >
+            Reply
+          </button>
+        </p>
+      </div>
+    </a>
+  </div>
+</div> -->
+
+<ngx-loading
+  [show]="loadingData"
+  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"
+></ngx-loading>

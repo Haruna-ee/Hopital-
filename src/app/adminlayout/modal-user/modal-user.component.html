@@ -1,0 +1,211 @@
+<!-- Add/update user modal -->
+<ng-template #addUpdateUserModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <span class="modal-title">{{ modalTitle }}</span>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmitUser()">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!--USERNAME-->
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Username" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="username"
+                placeholder="{{ 'Enter username' | translate }}"
+              />
+            </div>
+          </div>
+          <!--FIRSTNAME-->
+
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "First name" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="firstname"
+                placeholder="{{ 'Enter Surname' | translate }}"
+              />
+            </div>
+          </div>
+          <!--LASTNAME-->
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Last name" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="lastname"
+                placeholder="{{ 'Enter other names' | translate }}"
+              />
+            </div>
+          </div>
+          <!--EMAIL-->
+
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Email" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="email"
+                placeholder="{{ 'Enter email' | translate }}"
+              />
+            </div>
+          </div>
+
+          <!--PHONE-->
+
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Phone" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="phone"
+                placeholder="{{ 'Enter phone' | translate }}"
+              />
+            </div>
+          </div>
+
+          <!--PASSWORD-->
+
+          <div class="row form-group" *ngIf="action == 'add' || action == 'changePassword'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Password" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                placeholder="{{ 'Enter password' | translate }}"
+              />
+            </div>
+          </div>
+          <!--CONFIRM PASSWORD-->
+
+          <div class="row form-group" *ngIf="action == 'add' || action == 'changePassword'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Confirm Password" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="password"
+                class="form-control"
+                formControlName="confirmPwd"
+                placeholder="{{ 'Confirm Password' | translate }}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <input type="text" class="hidden" formControlName="id"> -->
+      <button type="submit" class="hidden" #addUserSubmitBtn></button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      *ngIf="action == 'add'"
+      type="button"
+      class="btn btn-sm btn-danger"
+      (click)="resetUserForm()"
+    >
+      <i class="fa fa-cut"></i>&nbsp;
+      <span>{{ "Reset" | translate }}</span>
+    </button>
+    <button
+      *ngIf="action == 'update'"
+      type="button"
+      class="btn btn-sm btn-success"
+      (click)="restoreUserForm()"
+    >
+      <i class="fa fa-undo"></i>&nbsp;
+      <span>{{ "Restore" | translate }}</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm btn-secondary"
+      (click)="d('Cancel button')"
+    >
+      <i class="fa fa-remove"></i>&nbsp;{{ "Cancel" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm btn-primary"
+      [disabled]="!userFormIsValid()"
+      (click)="addUserSubmitBtn.click()"
+    >
+      <i class="fa fa-save"></i>&nbsp;
+      <span>{{ "Save" | translate }}</span>
+    </button>
+  </div>
+</ng-template>
+
+<!-- delete city modal -->
+<ng-template #deleteUserModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <span class="modal-title">{{ modalTitle }}</span>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <span class="warning-message"
+      >{{ "Do you really want to delete this user?" | translate }}
+    </span>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-sm btn-secondary"
+      (click)="d('Cancel button')"
+    >
+      <i class="fa fa-remove"></i>&nbsp;{{ "Cancel" | translate }}
+    </button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="deleteUser()">
+      <i class="fa fa-check"></i>&nbsp;
+      <span>{{ "Proceed" | translate | lowercase }}</span>
+    </button>
+  </div>
+</ng-template>
+
+<ngx-loading
+  [show]="loadingData"
+  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"
+></ngx-loading>

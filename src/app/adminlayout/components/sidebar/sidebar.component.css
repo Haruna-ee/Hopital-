@@ -1,0 +1,13 @@
+
+a:hover {
+  background: darken(#944f83, 5%) !important;
+  color: rgb(0, 0, 0);
+}
+a.router-link-active {
+  background: darken(#944f83, 5%) !important;
+  color: rgb(20, 20, 20);
+}
+
+a{
+  text-decoration:none;
+}

@@ -10,6 +10,8 @@ import { CoreService } from '../../core/core.service';
 })
 export class LoginComponent implements OnInit {
 
+  public loading = false;
+
   public loginForm = this.formBuilder.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -18,36 +20,47 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authenticationservice: AuthenticationService,
+    private authenticationService: AuthenticationService,
     public core: CoreService) { }
 
   ngOnInit() {
+
   }
 
-  onSubmit() {
-    let values = this.loginForm.value;
-    console.log(values);
-    //this.loading = true;
 
-    if (!this.core.isEmptyOrNull(values.email) || !this.core.isEmptyOrNull(values.password)) {
-      // this.core.error("Username and password is required.");
+  get f() { return this.loginForm.controls; }
+
+
+  onSubmit() {
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      this.loading = false;
       return;
     }
 
-    // this.authenticationservice.login(values).then(r=>{
-    //   //console.log(r);
-    //   localStorage.setItem('currentUser', JSON.stringify(r[0]));
-    //  // this.core.success("Login successful. Redirecting...");
-    //   localStorage.setItem("page","menu");
+    let values = this.loginForm.value;
+    this.loading = true;
 
-    //   setTimeout(function(){
-    //    this.location.href="";
-    //   },2000);
+    if (this.core.isEmptyOrNull(values.email) || this.core.isEmptyOrNull(values.password)) {
+      this.core.error("Email and password is required.");
+      this.loading = false;
+      return;
+    }
 
-    // }).catch(e=>{
-    //   //this.loading = false;
-    //   //this.core.handleError(e,"Login");
-    // });
+    this.authenticationService.login(values).then(r => {
+      localStorage.setItem('token', JSON.stringify(r));
+      this.core.success('Login successful.Logging you in......')
+      setTimeout(function () {
+        this.location.href = "/home";
+      }, 2000);
+      this.loading = false;
+
+    }).catch(e => {
+      this.loading = false;
+      this.core.handleError(e, "login");
+    });
+
 
   }
 

@@ -1,0 +1,146 @@
+<!-- Add/update user modal -->
+<ng-template #addUpdateDrugModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <span class="modal-title">{{ modalTitle }}</span>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form" [formGroup]="drugForm" (ngSubmit)="onSubmitDrug()">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <!--NAME-->
+
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Name" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                placeholder="{{ 'Enter name' | translate }}"
+              />
+            </div>
+          </div>
+          <!--CATEGORY-->
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Category" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="category"
+                placeholder="{{ 'Enter category' | translate }}"
+              />
+            </div>
+          </div>
+          <!--PRICE-->
+
+          <div class="row form-group" *ngIf="action == 'add' || action == 'update'">
+            <label class="col-sm-4 control-label">
+              <span>{{ "Price" | translate }}</span
+              >&nbsp;<span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="price"
+                placeholder="{{ 'Enter price' | translate }}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <input type="text" class="hidden" formControlName="id"> -->
+      <button type="submit" class="hidden" #addDrugSubmitBtn></button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      *ngIf="action == 'add'"
+      type="button"
+      class="btn btn-sm btn-danger"
+      (click)="resetDrugForm()"
+    >
+      <i class="fa fa-cut"></i>&nbsp;
+      <span>{{ "Reset" | translate }}</span>
+    </button>
+    <button
+      *ngIf="action == 'update'"
+      type="button"
+      class="btn btn-sm btn-success"
+      (click)="restoreDrugForm()"
+    >
+      <i class="fa fa-undo"></i>&nbsp;
+      <span>{{ "Restore" | translate }}</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm btn-secondary"
+      (click)="d('Cancel button')"
+    >
+      <i class="fa fa-remove"></i>&nbsp;{{ "Cancel" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-sm btn-primary"
+      [disabled]="!drugFormIsValid()"
+      (click)="addDrugSubmitBtn.click()"
+    >
+      <i class="fa fa-save"></i>&nbsp;
+      <span>{{ "Save" | translate }}</span>
+    </button>
+  </div>
+</ng-template>
+
+<!-- delete city modal -->
+<ng-template #deleteDrugModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <span class="modal-title">{{ modalTitle }}</span>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <span class="warning-message"
+      >{{ "Do you really want to delete this drug?" | translate }}
+    </span>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-sm btn-secondary"
+      (click)="d('Cancel button')"
+    >
+      <i class="fa fa-remove"></i>&nbsp;{{ "Cancel" | translate }}
+    </button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="deleteDrug()">
+      <i class="fa fa-check"></i>&nbsp;
+      <span>{{ "Proceed" | translate | lowercase }}</span>
+    </button>
+  </div>
+</ng-template>
+
+<ngx-loading
+  [show]="loadingData"
+  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"
+></ngx-loading>

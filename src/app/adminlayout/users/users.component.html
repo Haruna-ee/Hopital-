@@ -1,0 +1,121 @@
+<div class="card pad">
+  <div class="container row">
+    <h4>Users</h4>
+  </div>
+  <div class="col-lg-12 mt-4 mt-lg-0">
+    <dx-data-grid
+      *ngIf="users"
+      id="usersContainer"
+      [dataSource]="users"
+      [columnAutoWidth]="true"
+      [showBorders]="true"
+      [showRowLines]="true"
+      [showColumnLines]="false"
+      [allowColumnReordering]="true"
+      [allowCollapsing]="false"
+      [wordWrapEnabled]="true"
+      [hoverStateEnabled]="true"
+      [stateStoring]="usersStateOptions"
+      (onFileSaving)="core.onFileSaving($event, 'Users')"
+    >
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+      <dxo-paging [enabled]="true" [pageSize]="10"></dxo-paging>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="[5, 10, 20, 30]"
+        [showInfo]="true"
+      ></dxo-pager>
+      <dxo-search-panel
+        [visible]="true"
+        [width]="240"
+        [placeholder]="'Search...' | translate"
+      ></dxo-search-panel>
+
+      <!-- Columns -->
+      <dxi-column
+        dataField="email"
+        [caption]="'Email' | translate"
+      ></dxi-column>
+
+      <dxi-column dataField="role" [caption]="'Role' | translate"></dxi-column>
+
+      <dxi-column
+        dataField="active"
+        [caption]="'Active' | translate"
+        cellTemplate="activeTemplate"
+      ></dxi-column>
+
+      <dxi-column
+        dataField="surname"
+        [caption]="'Names' | translate"
+      ></dxi-column>
+      <dxi-column
+        dataField="phone"
+        [caption]="'Phone' | translate"
+      ></dxi-column>
+
+      <dxi-column
+        cellTemplate="actionsTemplate"
+        caption=""
+        alignment="right"
+      ></dxi-column>
+      <div *dxTemplate="let cell of 'activeTemplate'">
+          <span *ngIf="cell.data.active"> <i class="fa fa-check green"></i></span>
+          <span *ngIf="!cell.data.active"> <i class="fa fa-ban red"></i></span>
+      </div>
+      <div *dxTemplate="let cell of 'actionsTemplate'">
+        <div class="mainActions">
+          <ul>
+            <!-- <li *ngIf="core.userHasPermission('RDBENIF')">
+              <i
+                class="fa fa-lg fa-eye"
+                [title]="'View details' | translate"
+                (click)="fetchDataForDisplay(cell.data, origin, $event)"
+              ></i>
+            </li> -->
+            <!-- <li>
+              <i
+                class="fa fa-lg fa-edit blue"
+                [title]="'Edit basic information' | translate"
+                (click)="openUserModal('update', cell.data, $event)"
+              ></i>
+            </li> -->
+            <li>
+              <i
+                class="fa fa-lg fa-trash-o red"
+                [title]="'Delete user' | translate"
+                (click)="openUserModal('delete', cell.data, $event)"
+              ></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <dxo-export
+        [enabled]="true"
+        fileName="Users"
+        [allowExportSelectedData]="false"
+      ></dxo-export>
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    </dx-data-grid>
+  </div>
+</div>
+
+<app-modal-user
+  #userModals
+  [user]="theUser"
+  origin="user"
+  [action]="userModalAction"
+  (userModalClosed)="onUserModalClosed()"
+  (userAdded)="onUserAdded($event)"
+  (userUpdated)="onUserUpdated($event)"
+  (userDeleted)="onUserDeleted($event)"
+>
+</app-modal-user>
+
+
+
+<ngx-loading
+  [show]="loadingData"
+  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"
+></ngx-loading>

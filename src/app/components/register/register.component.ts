@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '../../services/authentication.service';
 import { CoreService } from '../../core/core.service';
 
@@ -10,10 +11,10 @@ import { CoreService } from '../../core/core.service';
 })
 export class RegisterComponent implements OnInit {
 
+  public loading = false;
   public registerForm = this.formBuilder.group({
-    names: ['', Validators.required],
-    phone: ['', Validators.required],
     email: ['', Validators.required],
+    role: ['', Validators.required],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
   });
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authenticationservice: AuthenticationService,
+    private authenticationService: AuthenticationService,
     public core: CoreService) { }
 
   ngOnInit() {
@@ -29,28 +30,40 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     let values = this.registerForm.value;
-    console.log(values);
-    //this.loading = true;
 
-    if (!this.core.isEmptyOrNull(values.email) || !this.core.isEmptyOrNull(values.password)) {
-      // this.core.error("Username and password is required.");
+    this.loading = true;
+
+    if (this.core.isEmptyOrNull(values.email) || this.core.isEmptyOrNull(values.password)) {
+      this.core.error("Email and password is required.");
+      this.loading = false;
       return;
     }
 
-    // this.authenticationservice.register(values).then(r=>{
-    //   //console.log(r);
-    //   localStorage.setItem('currentUser', JSON.stringify(r[0]));
-    //  // this.core.success("register successful. Redirecting...");
-    //   localStorage.setItem("page","menu");
+    if (values.password != values.confirmPassword) {
+      this.core.error("Passwords must match");
+      this.loading = false;
+      return;
+    }
 
-    //   setTimeout(function(){
-    //    this.location.href="";
-    //   },2000);
 
-    // }).catch(e=>{
-    //   //this.loading = false;
-    //   //this.core.handleError(e,"register");
-    // });
+    if (this.core.isEmptyOrNull(values.role)) {
+      this.core.error("Select role");
+      this.loading = false;
+      return;
+    }
+
+    this.authenticationService.register(values).then(r => {
+      localStorage.setItem('token', JSON.stringify(r));
+      this.core.success('Sign up succesful, check email and verify your account, then login')
+      setTimeout(function () {
+        this.location.href = "/login";
+      }, 2000);
+      this.loading = false;
+
+    }).catch(e => {
+      this.loading = false;
+      this.core.handleError(e, "signup");
+    });
 
   }
 

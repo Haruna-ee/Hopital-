@@ -1,0 +1,86 @@
+.chart {
+  position: relative;
+  padding: 0 !important;
+}
+.chart * {
+  position: relative !important;
+}
+.minichart {
+  height: 200px;
+}
+.mainchart {
+  height: 250px;
+}
+
+.summary_items {
+  height: 100px;
+  width: 150px;
+}
+
+.summary_text_size {
+  font-size: large;
+}
+
+.app_color {
+  background-color: #2a61a0;
+  color: white;
+}
+
+.text_color {
+  color: #2a61a0;
+}
+
+.text-left > span {
+  font-weight: bold;
+}
+
+.toggle_button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.put_space {
+  margin-right: 5px;
+}
+
+.take_off_padding {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+@media (max-width: 540px) {
+  .put_space_sm {
+    margin-right: 5px;
+  }
+
+  .put_width_sm {
+    width: 100%;
+  }
+}
+
+.test {
+  width: 100px;
+  height: 100px;
+  border: 2px solid lightblue;
+}
+
+.test:before {
+  content: "\ec50";
+  font-family: icomoon;
+  width: 100%;
+  height: 100%;
+  font-size: 5em;
+  text-align: center;
+  display: block;
+  line-height: 100px;
+}
+
+/* For the collapsible titles */
+a::after {
+  font-family: FontAwesome;
+  text-decoration: none;
+}
+a[aria-expanded="true"]::after {
+  font-family: FontAwesome;
+  text-decoration: none;
+}

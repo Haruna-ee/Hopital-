@@ -1,0 +1,151 @@
+<div class="pad">
+  <div class="container row bootstrap snippets bootdey">
+    <div class="panel-body inf-content">
+      <div class="row mt-4 ml-4">
+        <div class="col-md-4">
+          <img
+            alt=""
+            style="width: 600px"
+            title=""
+            class="img-circle img-thumbnail isTooltip"
+            src="https://bootdey.com/img/Content/avatar/avatar7.png"
+            data-original-title="Usuario"
+          />
+          <ul title="Ratings" class="list-inline ratings text-center">
+            <li>
+              <a href="#"><span class="glyphicon glyphicon-star"></span></a>
+            </li>
+            <li>
+              <a href="#"><span class="glyphicon glyphicon-star"></span></a>
+            </li>
+            <li>
+              <a href="#"><span class="glyphicon glyphicon-star"></span></a>
+            </li>
+            <li>
+              <a href="#"><span class="glyphicon glyphicon-star"></span></a>
+            </li>
+            <li>
+              <a href="#"><span class="glyphicon glyphicon-star"></span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col"><strong>Information</strong><br /></div>
+            <div class="col pull-right">
+              <button
+                class="addButtons badge badge-success pointer"
+                (click)="openUserModal('update', null, $event)"
+              >
+                {{ "Edit profile" | translate }}
+              </button>
+            </div>
+          </div>
+          <br />
+          <div class="table-responsive">
+            <table class="table table-user-information">
+              <tbody *ngIf="user">
+                <tr>
+                  <td>
+                    <strong>
+                      <span
+                        class="glyphicon glyphicon-user text-primary"
+                      ></span>
+                      First Name
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ user.firstname ? user.firstname : "-" }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <span
+                        class="glyphicon glyphicon-cloud text-primary"
+                      ></span>
+                      Lastname
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ user.lastname ? user.lastname : "-" }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      <span
+                        class="glyphicon glyphicon-bookmark text-primary"
+                      ></span>
+                      Username
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ user.username ? user.username : "-" }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      <span
+                        class="glyphicon glyphicon-bookmark text-primary"
+                      ></span>
+                      Phone
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ user.phone ? user.phone : "-" }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      <span
+                        class="glyphicon glyphicon-eye-open text-primary"
+                      ></span>
+                      Role
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ user.role ? user.role : "-" }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <span
+                        class="glyphicon glyphicon-envelope text-primary"
+                      ></span>
+                      Email
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ user.email ? user.email : "-" }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-user
+  #userModals
+  [user]="theUser"
+  origin="user"
+  [action]="userModalAction"
+  (userModalClosed)="onUserModalClosed()"
+  (userUpdated)="onUserUpdated($event)"
+>
+</app-modal-user>
+
+<ngx-loading
+  [show]="loadingData"
+  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"
+></ngx-loading>

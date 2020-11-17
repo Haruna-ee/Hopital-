@@ -1,3 +1,6 @@
+<div class="alert-container">
+  <app-login-alert></app-login-alert>
+</div>
 <br />
 <br />
 <div id="pricing" class="cards-2">
@@ -13,7 +16,7 @@
               Get right in |
               <span routerLink="/" class="pointer">E-Hospital</span>
             </div>
-            <form role="form" [formGroup]="" (ngSubmit)="onSubmit()">
+            <form role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroupPrepend">
@@ -64,11 +67,13 @@
                   <a routerLink="/register">Register</a></span
                 >
               </div>
+
+              <div class="button-wrapper">
+                <button class="btn-solid-reg pointer" type="submit" [disabled]="!loginForm.valid">Login  <i *ngIf="loading" class="fa fa-spinner fa-spin"></i></button>
+              </div>
             </form>
 
-            <div class="button-wrapper">
-              <a class="btn-solid-reg page-scroll" routerLink="/">Login</a>
-            </div>
+
           </div>
         </div>
         <!-- end of card -->

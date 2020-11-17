@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-sm-4" *ngIf="role!='patient'">
+    <div class="card-box tilebox-one">
+      <i class="icon-layers float-right text-muted"></i>
+      <h6 class="text-muted text-uppercase mt-0">All Users</h6>
+      <h2 class="" data-plugin="counterup">{{users ? users.length : 0}}</h2>
+      <span class="badge badge-custom">+11% </span
+      ><span class="text-muted">From previous period</span>
+    </div>
+  </div>
+  <!-- end col -->
+  <div class="col-sm-4">
+    <div class="card-box tilebox-one">
+      <i class="icon-paypal float-right text-muted"></i>
+      <h6 class="text-muted text-uppercase mt-0">Doctors</h6>
+      <h2 class=""><span data-plugin="counterup">{{doctors ? doctors.length : 0}}</span></h2>
+      <span class="badge badge-danger">-29% </span
+      ><span class="text-muted">From previous period</span>
+    </div>
+  </div>
+  <!-- end col -->
+  <div class="col-sm-4">
+    <div class="card-box tilebox-one">
+      <i class="icon-rocket float-right text-muted"></i>
+      <h6 class="text-muted text-uppercase mt-0">Nurses</h6>
+      <h2 class="" data-plugin="counterup">{{nurses ? nurses.length : 0}}</h2>
+      <span class="badge badge-secondary">+89% </span
+      ><span class="text-muted">Last year</span>
+    </div>
+  </div>
+
+  <!-- end col -->
+  <div class="col-sm-4" *ngIf="role!='patient'">
+    <div class="card-box tilebox-one">
+      <i class="icon-rocket float-right text-muted"></i>
+      <h6 class="text-muted text-uppercase mt-0">Patients</h6>
+      <h2 class="" data-plugin="counterup">{{patients ? patients.length : 0}}</h2>
+      <span class="badge badge-warning">+89% </span
+      ><span class="text-muted">Seasonal</span>
+    </div>
+  </div>
+  <!-- end col -->
+  <div class="col-sm-4" *ngIf="role!='patient'">
+    <div class="card-box tilebox-one">
+      <i class="icon-rocket float-right text-muted"></i>
+      <h6 class="text-muted text-uppercase mt-0">Product Sold</h6>
+      <h2 class="" data-plugin="counterup">1,890</h2>
+      <span class="badge badge-primary">+89% </span
+      ><span class="text-muted">Last year</span>
+    </div>
+  </div>
+  <!-- end col -->
+  <div class="col-sm-4" *ngIf="role!='patient'">
+    <div class="card-box tilebox-one">
+      <i class="icon-paypal float-right text-muted"></i>
+      <h6 class="text-muted text-uppercase mt-0">Revenue</h6>
+      <h2 class="">$<span data-plugin="counterup">{{5350}}</span></h2>
+      <span class="badge badge-danger">-29% </span
+      ><span class="text-muted">Bi annual</span>
+    </div>
+  </div>
+</div>
+<!-- end row -->
+
+<ngx-loading
+  [show]="loadingData"
+  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"
+></ngx-loading>
