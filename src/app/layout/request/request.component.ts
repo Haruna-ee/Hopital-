@@ -77,7 +77,6 @@ export class RequestComponent implements OnInit {
   onSubmitRequest() {
     if (this.requestFormIsValid()) {
       const values = this.requestForm.value;
-
       this.addRequest(values);
     }
   }

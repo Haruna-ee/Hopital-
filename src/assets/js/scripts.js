@@ -30,6 +30,8 @@
         $("#show_hide_password i").addClass("fa-eye");
       }
     });
+
+
   });
 
   /* Navbar Scripts */

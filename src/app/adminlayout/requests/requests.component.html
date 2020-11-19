@@ -78,8 +78,8 @@
 
 
       <div *dxTemplate="let cell of 'statusTemplate'">
-        <span *ngIf="cell.data.status"> <i class="fa fa-check green"></i></span>
-        <span *ngIf="!cell.data.status"> <i class="fa fa-ban red"></i></span>
+        <span *ngIf="cell.data.status" title="Attended to" class="pointer"> <i class="fa fa-check green"></i></span>
+        <span *ngIf="!cell.data.status" title="Not yet attended to" class="pointer"> <i class="fa fa-ban red"></i></span>
       </div>
       <div *dxTemplate="let cell of 'actionsTemplate'">
         <div class="mainActions">
@@ -91,7 +91,7 @@
                 (click)="fetchDataForDisplay(cell.data, $event)"
               ></i>
             </li>
-            <li *ngIf="role!='patient'">
+            <li *ngIf="user.role!='patient'">
               <i
                 class="fa fa-lg fa-plus blue"
                 [title]="'Prescribe drug' | translate"

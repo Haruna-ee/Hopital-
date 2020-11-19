@@ -4,6 +4,7 @@ import { UrlsService } from '../core/urls.service';
 import { CoreService } from '../core/core.service';
 import { CustomHttpParamEncoder } from "../core/custom-http-param-encoder";
 import "rxjs/add/operator/timeout";
+import { letProto } from 'rxjs-compat/operator/let';
 
 @Injectable({
   providedIn: 'root'
@@ -110,10 +111,15 @@ export class RequestsService {
 
 
    /** GET: fetch the details of a request*/
-   getAllPatientRequests(): Promise<any> {
+   getAllPatientRequests(id): Promise<any> {
     // if(this.core.requestHasPermission('xxx')){
     if (true) {
-      const url = `${this.baseUrl}/usrrequests`;
+      let url = `${this.baseUrl}/usrrequests`;
+
+
+      if (!this.core.isEmptyOrNull(id)) {
+        url += `/${encodeURIComponent(id)}`;
+      }
 
       return new Promise((resolve, reject) => {
         this.http.get<any>(url)

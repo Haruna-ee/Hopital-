@@ -19,7 +19,6 @@ export class ModalUserDrugsComponent implements OnInit {
 
   modalReference: any;
 
-
   @Input() userDrug: any;
   @Input() drugs: any;
   @Input() request: any;
@@ -104,7 +103,7 @@ export class ModalUserDrugsComponent implements OnInit {
 
   addUserDrug(values) {
     this.loadingData = true;
-    values.user = this.request.user;
+    values.user = this.request.email;
     this.drugsService.addUserDrug(values).then((result) => {
       this.loadingData = false;
       this.core.success(`Prescription successfully added`);
@@ -121,6 +120,7 @@ export class ModalUserDrugsComponent implements OnInit {
     this.modalReference.close();
     this.notifyOfModalDismissal();
   }
+
 
   notifyOfModalDismissal() {
     this.userDrugModalClosed.emit();

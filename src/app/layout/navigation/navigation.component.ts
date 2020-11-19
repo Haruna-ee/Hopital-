@@ -12,4 +12,8 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
   }
 
+  redirectToChat(){
+    window.location.href = 'http://localhost:3000/';
+  }
+
 }

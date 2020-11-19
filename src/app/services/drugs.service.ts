@@ -186,6 +186,36 @@ export class DrugsService {
     }
   }
 
+  /** GET: fetch the details of a drug*/
+  getAllUserDrugs(id): Promise<any> {
+    // if(this.core.userHasPermission('xxx')){
+    if (true) {
+      let url = `${this.baseUrl}/usrdrugsmd`;
+
+      if (!this.core.isEmptyOrNull(id)) {
+        url += `/${encodeURIComponent(id)}`;
+      }
+
+      return new Promise((resolve, reject) => {
+        this.http.get<any>(url)
+          .timeout(this.httpTimeout)
+          .subscribe(
+            (data: any) => {
+              if (data.status != 'error') {
+                resolve(data);
+              } else {
+                reject(data);
+              }
+            },
+            (error: any) => {
+              reject(error);
+            });
+      });
+    } else {
+      return this.core.fakePromise('error', 'Sorry, you\'re not allowed to do this!');
+    }
+  }
+
 
   /** GET: fetch the details of a user*/
   getDrug(id): Promise<any> {

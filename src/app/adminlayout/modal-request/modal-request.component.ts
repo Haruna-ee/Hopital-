@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CoreService } from '../../core/core.service';
+import { DrugsService } from '../../services/drugs.service';
 import { RequestsService } from '../../services/requests.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
@@ -18,6 +19,8 @@ export class ModalRequestComponent implements OnInit {
   closeResult: string;
   public modalTitle = '';
   public loadingData = false;
+
+  public userdrugs: any;
 
   modalReference: any;
 
@@ -38,6 +41,7 @@ export class ModalRequestComponent implements OnInit {
   constructor(
     public core: CoreService,
     private requestsService: RequestsService,
+    private drugsService: DrugsService,
     private fb: FormBuilder,
     private modalService: NgbModal
   ) { }
@@ -50,8 +54,8 @@ export class ModalRequestComponent implements OnInit {
       section: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      time:[''],
-      requestcomment :['']
+      time: [''],
+      requestcomment: ['']
     });
   }
 
@@ -78,8 +82,9 @@ export class ModalRequestComponent implements OnInit {
         this.modalTitle = 'Update request';
         this.populateRequestForm();
         this.modalReference = this.modalService.open(this.addUpdateModal, this.core.ngbModalOptions);
-      }else if (this.action == 'view') {
+      } else if (this.action == 'view') {
         this.modalTitle = 'View request';
+        this.getAllUserDrugs();
         this.modalReference = this.modalService.open(this.requestDetailsModal, this.core.ngbModalOptions);
       } else if (this.action == 'delete') {
         this.modalTitle = 'Delete request';
@@ -103,13 +108,13 @@ export class ModalRequestComponent implements OnInit {
     if (this.requestFormIsValid()) {
       const values = this.requestForm.value;
 
-        if (this.action == 'update') {
-          this.updateRequest(values);
-        } else if (this.action == 'delete') {
-          this.deleteRequest();
-        } else {
-          console.warn('action not specified, don\'t know what to do.');
-        }
+      if (this.action == 'update') {
+        this.updateRequest(values);
+      } else if (this.action == 'delete') {
+        this.deleteRequest();
+      } else {
+        console.warn('action not specified, don\'t know what to do.');
+      }
 
     }
   }
@@ -143,18 +148,46 @@ export class ModalRequestComponent implements OnInit {
     });
   }
 
+
+  async getAllUserDrugs() {
+    this.loadingData = true;
+    await this.drugsService.getAllUserDrugs(this.request.email).then(drugs => {
+      let data = [];
+      //this.userdrugs = drugs;
+      drugs.forEach((drug) => {
+
+
+        this.drugsService
+          .getDrug(drug.drug)
+          .then((drugDetails) => {
+            drug.drugname = drugDetails.name;
+            data.push(drug);
+            this.userdrugs = [...data];
+          });
+
+      });
+      this.loadingData = false;
+    }).catch(e => {
+      this.loadingData = false;
+      this.core.handleError(e, 'getAllUserDrugs');
+    });
+  }
+
+
   resetRequestForm() {
     this.requestForm.reset();
 
   }
 
   requestFormIsValid() {
-    if (this.action == 'add' || this.action == 'update' ) {
+    if (this.action == 'add') {
       return this.requestForm.controls.name.valid
         && this.requestForm.controls.email.valid
         && this.requestForm.controls.phone.valid
         && this.requestForm.controls.reason.valid
         && this.requestForm.controls.section.valid;
+    } else {
+      return true;
     }
   }
 
@@ -178,7 +211,7 @@ export class ModalRequestComponent implements OnInit {
   }
 
   deleteRequest() {
-    const id =this.request.id;
+    const id = this.request.id;
     this.loadingData = true;
     this.requestsService.deleteRequest(id).then(() => {
       this.loadingData = false;

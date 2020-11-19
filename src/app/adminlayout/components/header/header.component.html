@@ -12,6 +12,7 @@
           /></span>
           <div class="media-body text-white" *ngIf="user">
             <h4 class="mt-1 mb-1 font-18">
+              {{ user.role ? user.role.toUpperCase() : "-" }}  &nbsp;
               {{ user.firstname ? user.firstname : "-" }} &nbsp;
               {{ user.lastname ? user.lastname : "-" }}
             </h4>

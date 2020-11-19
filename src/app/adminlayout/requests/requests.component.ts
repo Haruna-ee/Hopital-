@@ -82,7 +82,7 @@ export class RequestsComponent implements OnInit {
   public loadingData = false;
 
 
-  constructor(private core: CoreService, public drugService: DrugsService,
+  constructor(public core: CoreService, public drugService: DrugsService,
     public usersService: UserService,
     private _formBuilder: FormBuilder, public requestService: RequestsService,
     private modalService: NgbModal,) { }
@@ -90,22 +90,8 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
 
-    if (!this.core.isEmptyOrNull(localStorage.getItem("currentUser"))) {
-      this.getRole();
-    } else {
-      this.getUser();
-    }
+    this.getUser();
     this.getAllDrugs();
-  }
-
-  async getRole() {
-    this.role = this.core.pageMenu;
-
-    if(this.role=='patient'){
-     this.getAllPatientRequests();
-    }else{
-     this.getAllRequests();
-    }
   }
 
   async getUser() {
@@ -116,7 +102,7 @@ export class RequestsComponent implements OnInit {
       let temp = []
       temp.push(user);
       localStorage.setItem('currentUser', JSON.stringify(temp));
-      this.getRole();
+      this.fetchAppropriate();
       this.loadingData = false;
     }).catch(e => {
       this.loadingData = false;
@@ -133,13 +119,21 @@ export class RequestsComponent implements OnInit {
       let temp = []
       temp.push(user);
       localStorage.setItem('currentUser', JSON.stringify(temp));
-      this.getRole();
+      this.fetchAppropriate();
       this.loadingData = false;
     }).catch(e => {
       this.loadingData = false;
       this.core.handleError(e, 'getUser');
     });
 
+  }
+
+  async fetchAppropriate(){
+    if (this.user.role == 'patient') {
+      this.getAllPatientRequests();
+    } else {
+      this.getAllRequests();
+    }
   }
 
   async getAllDrugs() {
@@ -155,7 +149,7 @@ export class RequestsComponent implements OnInit {
 
   async getAllPatientRequests() {
     this.loadingData = true;
-    await this.requestService.getAllPatientRequests().then(requests => {
+    await this.requestService.getAllPatientRequests(this.user.email).then(requests => {
       this.requests = requests;
       this.loadingData = false;
     }).catch(e => {
@@ -181,7 +175,7 @@ export class RequestsComponent implements OnInit {
       event.stopPropagation();
     }
 
-    const id = data.id ;
+    const id = data.id;
     if (!this.core.isEmptyOrNull(id)) {
       this.openRequestModal('view', data, event);
     }

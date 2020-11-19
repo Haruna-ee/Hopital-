@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { AuthenticationService } from '../../services/authentication.service';
 import { CoreService } from '../../core/core.service';
 
@@ -12,19 +12,22 @@ export class LoginComponent implements OnInit {
 
   public loading = false;
 
-  public loginForm = this.formBuilder.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-  });
 
-
+  public loginForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    public core: CoreService) { }
+    private core: CoreService) { }
 
   ngOnInit() {
+    this.initForm();
+  }
 
+  initForm() {
+    this.loginForm = this.formBuilder.group({
+      email: ["", Validators.required],
+      password: ["", Validators.required],
+    });
   }
 
 
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
     }
 
     let values = this.loginForm.value;
+
     this.loading = true;
 
     if (this.core.isEmptyOrNull(values.email) || this.core.isEmptyOrNull(values.password)) {

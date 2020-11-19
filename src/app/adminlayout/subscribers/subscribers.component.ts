@@ -26,7 +26,7 @@ export class SubscribersComponent implements OnInit {
   public loadingData = false;
 
 
-  constructor(private core: CoreService,
+  constructor(public core: CoreService,
     private _formBuilder: FormBuilder, public subscribersService: SubscribersService,
     private modalService: NgbModal,) { }
 

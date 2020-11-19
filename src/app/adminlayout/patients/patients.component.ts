@@ -65,7 +65,7 @@ export class PatientsComponent implements OnInit {
   public loadingData = false;
 
 
-  constructor(private core: CoreService,
+  constructor(public core: CoreService,
     private _formBuilder: FormBuilder, public userService: UserService,
     private modalService: NgbModal,) { }
 

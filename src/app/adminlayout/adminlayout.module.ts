@@ -78,7 +78,7 @@ registerLocaleData(localeCm);
     ModalRequestComponent,
     ModalDrugsComponent,
     DrugsComponent,
-    ModalUserDrugsComponent
+    ModalUserDrugsComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

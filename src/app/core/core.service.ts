@@ -263,7 +263,7 @@ export class CoreService {
 
 
   success(msg) {
-    this.alertService.success(msg, true);
+   this.alertService.success(msg, true);
   }
 
   error(msg) {
