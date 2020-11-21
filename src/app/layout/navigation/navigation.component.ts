@@ -13,7 +13,7 @@ export class NavigationComponent implements OnInit {
   }
 
   redirectToChat(){
-    window.location.href = 'http://localhost:3000/';
+    window.location.href = 'http://localhost:3100/';
   }
 
 }
